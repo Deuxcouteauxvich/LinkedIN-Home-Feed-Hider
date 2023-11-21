@@ -1,0 +1,33 @@
+// ==UserScript==
+// @name LinkedIn Home Feed Hider
+// @namespace http://tampermonkey.net/
+// @version 0.1
+// @description Hide LinkedIn home feed while keeping other feeds like jobs and notifications visible
+// @author Deuxcouteauxvitch
+// @match https://www.linkedin.com/*
+// @grant none
+// ==/UserScript==
+
+(function() {
+ 'use strict';
+
+ // Function to hide the home feed
+ function hideHomeFeed() {
+ // Check if the current page is the LinkedIn homepage
+ if (window.location.pathname === "/feed/") {
+ // Select the main feed container
+ var feedContainer = document.querySelector('div.scaffold-finite-scroll.scaffold-finite-scroll--infinite');
+
+ // Check if the feed container exists and hide it
+ if (feedContainer) {
+ feedContainer.style.display = 'none';
+ }
+ }
+ }
+
+ // Run the hideHomeFeed function when the page loads
+ window.addEventListener('load', hideHomeFeed);
+
+ // Optionally, re-run the function periodically in case of dynamic content loading
+ setInterval(hideHomeFeed, 5000);
+})();
